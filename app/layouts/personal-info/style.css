@@ -2,10 +2,10 @@
 
 @layer components {
   .personal-info-wrapper {
-    @apply bg-slate-400 h-screen flex justify-center items-center;
+    @apply bg-slate-400 h-screen w-screen flex justify-center items-center;
   }
 
   .personal-wrapper-inputs {
-    @apply flex flex-col gap-2;
+    @apply flex flex-col gap-2 w-fit;
   }
 }

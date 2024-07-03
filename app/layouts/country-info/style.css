@@ -2,7 +2,7 @@
 
 @layer components {
   .country-info-wrapper {
-    @apply bg-red-400 h-screen flex justify-center items-center;
+    @apply bg-red-400 h-screen w-screen flex justify-center items-center;
   }
 
   .country-wrapper-inputs {

@@ -56,7 +56,7 @@ export default function Index() {
   // console.log(allDataInputs);
 
   return (
-    <div>
+    <div className="flex w-fit">
       <PersonalInfo setPersonalDataFunction={setPersonalData} />
       <CountryInfo setCountryDataFunction={setCountryData} />
       <ServicesInfo setServiceDataFunction={setServiceData} />
