@@ -1,4 +1,8 @@
 import type { MetaFunction } from "@remix-run/node";
+import { useEffect, useState } from "react";
+import { CountryInfo } from "~/layouts/country-info";
+import { PersonalInfo } from "~/layouts/personal-info";
+import { ServicesInfo } from "~/layouts/services-info";
 
 export const meta: MetaFunction = () => {
   return [
@@ -8,41 +12,54 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
+  const [personalData, setPersonalData] = useState<PersonalData>({
+    name: "",
+    lastname: "",
+    email: "",
+  });
+
+  const [countryData, setCountryData] = useState<CountryData>({
+    country: "",
+    city: "",
+    address: "",
+  });
+
+  const [serviceData, setServiceData] = useState<ServicesData>({
+    priority: false,
+    service: "",
+  });
+
+  const [allDataInputs, setAllDataInputs] = useState<AllData>({
+    name: "",
+    lastname: "",
+    email: "",
+    country: "",
+    city: "",
+    address: "",
+    priority: false,
+    service: "",
+  });
+
+  useEffect(() => {
+    setAllDataInputs({
+      name: personalData.name,
+      lastname: personalData.lastname,
+      email: personalData.email,
+      country: countryData.country,
+      city: countryData.city,
+      address: countryData.address,
+      priority: serviceData.priority,
+      service: serviceData.service,
+    });
+  }, [personalData, countryData, serviceData]);
+
+  // console.log(allDataInputs);
+
   return (
-    <div className="font-sans p-4">
-      <h1 className="text-3xl">Welcome to Remix</h1>
-      <ul className="list-disc mt-4 pl-6 space-y-2">
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/quickstart"
-            rel="noreferrer"
-          >
-            5m Quick Start
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/tutorial"
-            rel="noreferrer"
-          >
-            30m Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/docs"
-            rel="noreferrer"
-          >
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+    <div>
+      <PersonalInfo setPersonalDataFunction={setPersonalData} />
+      <CountryInfo setCountryDataFunction={setCountryData} />
+      <ServicesInfo setServiceDataFunction={setServiceData} />
     </div>
   );
 }

@@ -1,0 +1,7 @@
+@tailwind components;
+
+@layer components {
+  .spacing-label-select {
+    @apply flex flex-col gap-2;
+  }
+}

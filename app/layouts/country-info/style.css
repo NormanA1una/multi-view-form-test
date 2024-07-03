@@ -1,0 +1,11 @@
+@tailwind components;
+
+@layer components {
+  .country-info-wrapper {
+    @apply bg-red-400 h-screen flex justify-center items-center;
+  }
+
+  .country-wrapper-inputs {
+    @apply flex flex-col gap-2;
+  }
+}
