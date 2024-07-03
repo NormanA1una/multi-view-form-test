@@ -12,7 +12,7 @@ npm run dev
 
 ## Deployment
 
-First, build your app for production:
+First, build your app for production!:
 
 ```sh
 npm run build
