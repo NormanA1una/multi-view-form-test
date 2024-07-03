@@ -1,18 +1,27 @@
-import { InputText } from "~/components/input-text";
 import "./style.css";
+
+import { InputText } from "~/components/input-text";
 import { useEffect, useState } from "react";
 import { Button } from "~/components/button";
+import { useSlide } from "~/utils/context/SlideContext";
 
 export const CountryInfo = ({
+  countryData,
   setCountryDataFunction,
-  nextSlideFunction,
 }: {
+  countryData: CountryData;
   setCountryDataFunction: React.Dispatch<React.SetStateAction<CountryData>>;
-  nextSlideFunction: () => void;
 }) => {
   const [personalCountry, setCountry] = useState("");
+  const [isValidCountry, setIsValidCountry] = useState(false);
+
   const [personalCity, setCity] = useState("");
+  const [isValidCity, setIsValidCity] = useState(false);
+
   const [personalAddress, setAddress] = useState("");
+  const [isValidAddress, setIsValidAddress] = useState(false);
+
+  const { nextSlide } = useSlide();
 
   useEffect(() => {
     setCountryDataFunction({
@@ -29,18 +38,24 @@ export const CountryInfo = ({
           htmlFor="country"
           id="country"
           label="Country"
+          minLength={3}
+          setIsValid={setIsValidCountry}
           setInputState={setCountry}
         />
         <InputText
           htmlFor="city"
           id="city"
           label="City"
+          minLength={3}
+          setIsValid={setIsValidCity}
           setInputState={setCity}
         />
         <InputText
           htmlFor="address"
           id="address"
           label="Address"
+          minLength={30}
+          setIsValid={setIsValidAddress}
           setInputState={setAddress}
         />
       </div>
@@ -48,7 +63,8 @@ export const CountryInfo = ({
         <Button
           variant="primary"
           content="Continue"
-          onClickEvent={nextSlideFunction}
+          onClickEvent={nextSlide}
+          isDisabled={!(isValidCountry && isValidCity && isValidAddress)}
         />
       </div>
     </div>

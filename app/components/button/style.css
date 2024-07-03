@@ -2,6 +2,10 @@
 
 @layer components {
   .primary-style {
-    @apply bg-cyan-700 text-white font-semibold p-2 rounded-md;
+    @apply bg-cyan-700 text-white font-semibold p-2 rounded-md transition ease-in-out duration-[0.5s];
+  }
+
+  .primary-style-disabled {
+    @apply bg-slate-400 text-black font-semibold p-2 rounded-md transition ease-in-out duration-[0.5s];
   }
 }

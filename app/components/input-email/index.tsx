@@ -1,41 +1,39 @@
-import { useEffect } from "react";
 import "./style.css";
 
-type InputTextProps = {
+type InputEmailProps = {
   htmlFor: string;
   label: string;
   id: string;
   required?: boolean;
-  minLength?: number;
   value?: string;
-  setInputState: React.Dispatch<React.SetStateAction<string>>;
   setIsValid: React.Dispatch<React.SetStateAction<boolean>>;
+  setInputState: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const InputText = ({
+export const InputEmail = ({
   htmlFor,
   id,
   label,
   required,
-  minLength,
   value,
   setIsValid,
   setInputState,
-}: InputTextProps) => {
+}: InputEmailProps) => {
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     setInputState(e.target.value);
-    setIsValid(e.target.value.length > (minLength as number));
+    setIsValid(emailRegex.test(e.target.value));
   };
 
   return (
-    <div className="spacing-label-input">
+    <div className="spacing-label-email">
       <label htmlFor={htmlFor}>{label}</label>
       <input
         id={id}
-        type="text"
+        type="email"
         value={value}
         required={required}
-        minLength={minLength}
         onChange={handleOnChange}
       />
     </div>

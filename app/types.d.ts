@@ -15,4 +15,9 @@ type ServicesData = {
   service: string;
 };
 
+type SlideContextType = {
+  currentIndex: number;
+  nextSlide: () => void;
+};
+
 type AllData = PersonalData & CountryData & ServicesData;

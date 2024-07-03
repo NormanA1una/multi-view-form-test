@@ -1,18 +1,28 @@
-import { InputText } from "~/components/input-text";
 import "./style.css";
+
+import { InputText } from "~/components/input-text";
 import { useEffect, useState } from "react";
 import { Button } from "~/components/button";
+import { useSlide } from "~/utils/context/SlideContext";
+import { InputEmail } from "~/components/input-email";
 
 export const PersonalInfo = ({
+  personalData,
   setPersonalDataFunction,
-  nextSlideFunction,
 }: {
+  personalData: PersonalData;
   setPersonalDataFunction: React.Dispatch<React.SetStateAction<PersonalData>>;
-  nextSlideFunction: () => void;
 }) => {
   const [personalName, setName] = useState("");
+  const [isValidName, setIsValidName] = useState(false);
+
   const [personalLastname, setLastname] = useState("");
+  const [isValidLastName, setIsValidLastName] = useState(false);
+
   const [personalEmail, setEmail] = useState("");
+  const [isValidEmail, setIsValidEmail] = useState(false);
+
+  const { nextSlide } = useSlide();
 
   useEffect(() => {
     setPersonalDataFunction({
@@ -29,18 +39,25 @@ export const PersonalInfo = ({
           htmlFor="name"
           id="name"
           label="Name"
+          minLength={2}
+          setIsValid={setIsValidName}
           setInputState={setName}
         />
+
         <InputText
           htmlFor="lastname"
           id="lastname"
           label="Last Name"
+          minLength={2}
+          setIsValid={setIsValidLastName}
           setInputState={setLastname}
         />
-        <InputText
+
+        <InputEmail
           htmlFor="email"
           id="email"
           label="Email"
+          setIsValid={setIsValidEmail}
           setInputState={setEmail}
         />
       </div>
@@ -48,7 +65,8 @@ export const PersonalInfo = ({
         <Button
           variant="primary"
           content="Continue"
-          onClickEvent={nextSlideFunction}
+          onClickEvent={nextSlide}
+          isDisabled={!(isValidName && isValidLastName && isValidEmail)}
         />
       </div>
     </div>

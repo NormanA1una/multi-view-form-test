@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
 import "./style.css";
+
+import { useEffect, useState } from "react";
 import { InputCheckbox } from "~/components/input-checkbox";
 import { InputSelect } from "~/components/input-select";
 import { Button } from "~/components/button";
+import { useSlide } from "~/utils/context/SlideContext";
 
 const ServicesActives = [
   { value: "noselected", content: "Select a Service" },
@@ -13,13 +15,13 @@ const ServicesActives = [
 
 export const ServicesInfo = ({
   setServiceDataFunction,
-  nextSlideFunction,
 }: {
   setServiceDataFunction: React.Dispatch<React.SetStateAction<ServicesData>>;
-  nextSlideFunction: () => void;
 }) => {
   const [isPriority, setIsPriority] = useState(false);
   const [selectedService, setSelectedService] = useState("noselected");
+
+  const { nextSlide } = useSlide();
 
   useEffect(() => {
     setServiceDataFunction({ priority: isPriority, service: selectedService });
@@ -44,11 +46,7 @@ export const ServicesInfo = ({
         />
       </div>
       <div>
-        <Button
-          variant="primary"
-          content="Submit"
-          onClickEvent={nextSlideFunction}
-        />
+        <Button variant="primary" content="Submit" onClickEvent={nextSlide} />
       </div>
     </div>
   );

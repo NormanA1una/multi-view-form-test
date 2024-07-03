@@ -30,6 +30,7 @@ export const InputSelect = ({
               key={i}
               value={option.value}
               disabled={option.value === "noselected" ? true : false}
+              selected={option.value === "noselected" ? true : false}
             >
               {option.content}
             </option>
