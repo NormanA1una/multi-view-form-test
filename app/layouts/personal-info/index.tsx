@@ -1,11 +1,14 @@
 import { InputText } from "~/components/input-text";
 import "./style.css";
 import { useEffect, useState } from "react";
+import { Button } from "~/components/button";
 
 export const PersonalInfo = ({
   setPersonalDataFunction,
+  nextSlideFunction,
 }: {
   setPersonalDataFunction: React.Dispatch<React.SetStateAction<PersonalData>>;
+  nextSlideFunction: () => void;
 }) => {
   const [personalName, setName] = useState("");
   const [personalLastname, setLastname] = useState("");
@@ -39,6 +42,13 @@ export const PersonalInfo = ({
           id="email"
           label="Email"
           setInputState={setEmail}
+        />
+      </div>
+      <div>
+        <Button
+          variant="primary"
+          content="Continue"
+          onClickEvent={nextSlideFunction}
         />
       </div>
     </div>

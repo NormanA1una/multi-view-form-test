@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .routes-wrapper {
+    @apply relative h-screen w-screen overflow-hidden;
+  }
+
+  .routes-wrapper-ab {
+    @apply absolute flex transition-transform duration-500;
+  }
+}

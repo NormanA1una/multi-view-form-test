@@ -12,6 +12,8 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const [personalData, setPersonalData] = useState<PersonalData>({
     name: "",
     lastname: "",
@@ -53,13 +55,47 @@ export default function Index() {
     });
   }, [personalData, countryData, serviceData]);
 
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % 3);
+  };
+
   // console.log(allDataInputs);
 
+  /* 
+  TODO:
+
+  1) Make a context, for avoid prop drilling. Wrap the div "routes-wrapper-ab".
+
+  2) Searh if can pass function in the context, if is possible, pass the function nextSlide.
+
+  3) Fix Select bug, need initialize in disable value.
+
+  4) Add more style to the inputs.
+
+  extra: if have time, make a screen like "You data is submit succefully! 🎉"
+  
+  
+  */
+
   return (
-    <div className="flex w-fit">
-      <PersonalInfo setPersonalDataFunction={setPersonalData} />
-      <CountryInfo setCountryDataFunction={setCountryData} />
-      <ServicesInfo setServiceDataFunction={setServiceData} />
+    <div className="routes-wrapper">
+      <div
+        className="routes-wrapper-ab"
+        style={{ transform: `translateX(-${currentIndex * 100}vw)` }}
+      >
+        <PersonalInfo
+          setPersonalDataFunction={setPersonalData}
+          nextSlideFunction={nextSlide}
+        />
+        <CountryInfo
+          setCountryDataFunction={setCountryData}
+          nextSlideFunction={nextSlide}
+        />
+        <ServicesInfo
+          setServiceDataFunction={setServiceData}
+          nextSlideFunction={nextSlide}
+        />
+      </div>
     </div>
   );
 }

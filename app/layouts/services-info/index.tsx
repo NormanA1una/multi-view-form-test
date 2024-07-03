@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./style.css";
 import { InputCheckbox } from "~/components/input-checkbox";
 import { InputSelect } from "~/components/input-select";
+import { Button } from "~/components/button";
 
 const ServicesActives = [
   { value: "noselected", content: "Select a Service" },
@@ -12,8 +13,10 @@ const ServicesActives = [
 
 export const ServicesInfo = ({
   setServiceDataFunction,
+  nextSlideFunction,
 }: {
   setServiceDataFunction: React.Dispatch<React.SetStateAction<ServicesData>>;
+  nextSlideFunction: () => void;
 }) => {
   const [isPriority, setIsPriority] = useState(false);
   const [selectedService, setSelectedService] = useState("noselected");
@@ -38,6 +41,13 @@ export const ServicesInfo = ({
           id="prioritary"
           label="Prioritary"
           setInputState={setIsPriority}
+        />
+      </div>
+      <div>
+        <Button
+          variant="primary"
+          content="Submit"
+          onClickEvent={nextSlideFunction}
         />
       </div>
     </div>

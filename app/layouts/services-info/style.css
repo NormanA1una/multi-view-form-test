@@ -2,7 +2,7 @@
 
 @layer components {
   .services-info-wrapper {
-    @apply bg-orange-400 h-screen w-screen flex justify-center items-center;
+    @apply bg-orange-400 h-screen w-screen flex flex-col gap-6 justify-center items-center;
   }
 
   .services-wrapper-inputs {

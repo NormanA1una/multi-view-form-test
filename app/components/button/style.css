@@ -1,0 +1,7 @@
+@tailwind components;
+
+@layer components {
+  .primary-style {
+    @apply bg-cyan-700 text-white font-semibold p-2 rounded-md;
+  }
+}
