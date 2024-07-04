@@ -5,8 +5,8 @@ import { SlideProvider } from "~/utils/context/SlideContext";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Multi View Form Demo" },
+    { name: "description", content: "Welcome to the demo!" },
   ];
 };
 
