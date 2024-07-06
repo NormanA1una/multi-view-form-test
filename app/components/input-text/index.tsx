@@ -8,6 +8,8 @@ type InputTextProps = {
   required?: boolean;
   minLength?: number;
   value?: string;
+  labelClassName?: string;
+  inputClassName?: string;
   setInputState: React.Dispatch<React.SetStateAction<string>>;
   setIsValid: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -19,6 +21,8 @@ export const InputText = ({
   required,
   minLength,
   value,
+  inputClassName,
+  labelClassName,
   setIsValid,
   setInputState,
 }: InputTextProps) => {
@@ -29,11 +33,25 @@ export const InputText = ({
 
   return (
     <div className="spacing-label-input">
-      <label htmlFor={htmlFor}>{label}</label>
+      <label
+        htmlFor={htmlFor}
+        className={
+          labelClassName
+            ? `${labelClassName} label-text-style`
+            : "label-text-style"
+        }
+      >
+        {label}
+      </label>
       <input
         id={id}
         type="text"
         value={value}
+        className={
+          inputClassName
+            ? `${inputClassName} input-text-style`
+            : "input-text-style"
+        }
         required={required}
         minLength={minLength}
         onChange={handleOnChange}

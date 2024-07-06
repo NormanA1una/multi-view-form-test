@@ -61,6 +61,7 @@ export const CountryInfo = ({
       </div>
       <div>
         <Button
+          type="button"
           variant="primary"
           content="Continue"
           onClickEvent={nextSlide}

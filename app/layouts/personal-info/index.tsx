@@ -39,6 +39,7 @@ export const PersonalInfo = ({
           htmlFor="name"
           id="name"
           label="Name"
+          labelClassName="label-name-input"
           minLength={2}
           setIsValid={setIsValidName}
           setInputState={setName}
@@ -48,6 +49,7 @@ export const PersonalInfo = ({
           htmlFor="lastname"
           id="lastname"
           label="Last Name"
+          labelClassName="label-lastname-input"
           minLength={2}
           setIsValid={setIsValidLastName}
           setInputState={setLastname}
@@ -63,6 +65,7 @@ export const PersonalInfo = ({
       </div>
       <div>
         <Button
+          type="button"
           variant="primary"
           content="Continue"
           onClickEvent={nextSlide}

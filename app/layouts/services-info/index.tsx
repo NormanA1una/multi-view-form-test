@@ -35,6 +35,7 @@ export const ServicesInfo = ({
           id="service"
           label="Service"
           options={ServicesActives}
+          value={selectedService}
           setInputState={setSelectedService}
         />
 
@@ -46,7 +47,12 @@ export const ServicesInfo = ({
         />
       </div>
       <div>
-        <Button variant="primary" content="Submit" onClickEvent={nextSlide} />
+        <Button
+          type="submit"
+          variant="primary"
+          content="Submit"
+          onClickEvent={nextSlide}
+        />
       </div>
     </div>
   );

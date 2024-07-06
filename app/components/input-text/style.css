@@ -4,4 +4,23 @@
   .spacing-label-input {
     @apply flex flex-col gap-2;
   }
+
+  .label-text-style {
+    @apply text-[#FEFEFE] font-semibold;
+  }
+
+  .input-text-style {
+    @apply rounded-md py-2 pl-2 focus:!outline-none;
+  }
+
+  /* Custom styles ⬇*/
+
+  /* Personal infor file */
+  .label-name-input {
+    @apply text-[#FEFEFE] font-semibold;
+  }
+
+  .label-lastname-input {
+    @apply text-[#FEFEFE] font-semibold;
+  }
 }

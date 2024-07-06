@@ -4,4 +4,16 @@
   .spacing-label-email {
     @apply flex flex-col gap-2;
   }
+
+  .label-email-style {
+    @apply text-[#FEFEFE] font-semibold;
+  }
+
+  .input-email-style {
+    @apply rounded-md py-2 pl-2 focus:!outline-none;
+  }
+
+  /* Custom styles ⬇*/
+
+  /* Personal infor file */
 }
