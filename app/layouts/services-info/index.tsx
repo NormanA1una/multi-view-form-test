@@ -52,6 +52,7 @@ export const ServicesInfo = ({ register, enableTab }: ServicesInfoProps) => {
           type="submit"
           variant="primary"
           content="Submit"
+          isDisabled={true}
           onClickEvent={nextSlide}
         />
       </div>
