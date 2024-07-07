@@ -10,13 +10,13 @@ import { useSlide } from "~/utils/context/SlideContext";
 
 export const FormLayout = () => {
   const [dataSubmited, setDataSubmited] = useState<AllData>({
-    name: "",
-    lastname: "",
-    email: "",
-    country: "",
-    city: "",
-    address: "",
-    service: "",
+    name: "Norman",
+    lastname: "Aranda",
+    email: "norman@test.com",
+    country: "Nicaragua",
+    city: "Managua",
+    address: "pppppppppppppppppppppppppppp asfdasdas",
+    service: "develop",
     priority: false,
   });
   const [isSubmited, setIsSubmited] = useState(false);
@@ -66,6 +66,9 @@ export const FormLayout = () => {
 
     reset();
     resetAllStates();
+    setFirstScreenTab(true);
+    setSecondScreenTab(false);
+    setThirdScreenTab(false);
   });
 
   const handleSubmitData = (data: any) => {
@@ -90,6 +93,7 @@ export const FormLayout = () => {
         enableNextTab={setSecondScreenTab}
         dataSubmited={dataSubmited}
         isSubmited={isSubmited}
+        setIsSubmited={setIsSubmited}
       />
       <CountryInfo
         register={register}

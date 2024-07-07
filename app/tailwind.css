@@ -4,7 +4,7 @@
 
 @layer components {
   .routes-wrapper {
-    @apply relative h-screen w-screen overflow-hidden;
+    @apply relative h-screen w-screen overflow-x-hidden;
   }
 
   .routes-wrapper-ab {

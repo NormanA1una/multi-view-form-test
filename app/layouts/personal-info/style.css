@@ -2,7 +2,23 @@
 
 @layer components {
   .personal-info-wrapper {
-    @apply bg-slate-500 h-screen w-screen flex flex-col lg:flex-row gap-6 justify-center lg:justify-between items-end lg:items-center px-[5%];
+    @apply bg-slate-500 h-auto lg:h-screen w-screen flex flex-col lg:flex-row gap-6 justify-center lg:justify-between items-center lg:items-center py-8 lg:py-0 lg:px-[5%];
+  }
+
+  .personal-text-wrapper {
+    @apply flex flex-col lg:flex-row gap-6 w-full items-center px-6 lg:px-0;
+  }
+
+  .text-data-submited {
+    @apply w-full;
+  }
+
+  .title-data-submited {
+    @apply text-[#FEFEFE] text-3xl font-semibold;
+  }
+
+  .spacing-texts-data {
+    @apply flex flex-col gap-3;
   }
 
   .personal-wrapper-inputs {
