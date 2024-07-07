@@ -1,5 +1,4 @@
-import type { ActionFunction, MetaFunction } from "@remix-run/node";
-import { useState } from "react";
+import { json, type ActionFunction, type MetaFunction } from "@remix-run/node";
 import { SlideComponent } from "~/layouts/slide-component";
 import { SlideProvider } from "~/utils/context/SlideContext";
 
@@ -10,28 +9,30 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-/* export const action: ActionFunction = ({ request }) => {
-  const formData = request.formData();
+export const action: ActionFunction = async ({ request }) => {
+  const formData = await request.formData();
 
-  console.log(formData);
+  const formDataObject: { [key: string]: string | boolean | File | string[] } =
+    {};
 
-  return null;
-}; */
+  for (const [key, value] of formData.entries()) {
+    if (value instanceof File) {
+      formDataObject[key] = value;
+    } else {
+      formDataObject[key] = value;
+    }
+  }
+
+  formDataObject.priority = formData.has("priority")
+    ? formData.get("priority") === "on"
+      ? true
+      : false
+    : false;
+
+  return json({ success: true, dataSubmited: formDataObject });
+};
 
 export default function Index() {
-  const [allDataInputs, setAllDataInputs] = useState<AllData>({
-    name: "",
-    lastname: "",
-    email: "",
-    country: "",
-    city: "",
-    address: "",
-    priority: false,
-    service: "",
-  });
-
-  // console.log(allDataInputs);
-
   /* 
   TODO:
 
@@ -41,13 +42,13 @@ export default function Index() {
 
   3) Fix Select bug, need initialize in disable value. ✅
 
-  4) Add more style to the inputs.
+  4) Add more style to the inputs.✅
 
   5) Add validations on inputs for pass after push button continues.✅
 
-  6) Install YUP and react hook form
+  6) Install YUP and react hook form✅
 
-  7) Make form funtional
+  7) Make form funtional✅
 
   EXTRA: if have time, make a screen like "You data is submit succefully! 🎉"
   
@@ -56,7 +57,7 @@ export default function Index() {
 
   return (
     <SlideProvider>
-      <SlideComponent setAllDataInputs={setAllDataInputs} />
+      <SlideComponent />
     </SlideProvider>
   );
 }

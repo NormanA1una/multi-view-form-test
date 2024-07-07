@@ -4,7 +4,13 @@ const SlideContext = createContext<SlideContextType | undefined>(undefined);
 
 export const SlideProvider = ({ children }: { children: ReactNode }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [resetInputText, setResetInputText] = useState(false);
+
+  const [isValidName, setIsValidName] = useState(false);
+  const [isValidLastName, setIsValidLastName] = useState(false);
+  const [isValidEmail, setIsValidEmail] = useState(false);
+  const [isValidCountry, setIsValidCountry] = useState(false);
+  const [isValidCity, setIsValidCity] = useState(false);
+  const [isValidAddress, setIsValidAddress] = useState(false);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => {
@@ -12,8 +18,35 @@ export const SlideProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
+  const resetAllStates = () => {
+    setIsValidName(false);
+    setIsValidLastName(false);
+    setIsValidEmail(false);
+    setIsValidCountry(false);
+    setIsValidCity(false);
+    setIsValidAddress(false);
+  };
+
   return (
-    <SlideContext.Provider value={{ currentIndex, nextSlide }}>
+    <SlideContext.Provider
+      value={{
+        currentIndex,
+        nextSlide,
+        resetAllStates,
+        isValidEmail,
+        isValidLastName,
+        isValidName,
+        setIsValidEmail,
+        setIsValidLastName,
+        setIsValidName,
+        isValidAddress,
+        isValidCity,
+        isValidCountry,
+        setIsValidAddress,
+        setIsValidCity,
+        setIsValidCountry,
+      }}
+    >
       {children}
     </SlideContext.Provider>
   );

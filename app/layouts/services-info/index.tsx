@@ -5,6 +5,7 @@ import { InputCheckbox } from "~/components/input-checkbox";
 import { InputSelect } from "~/components/input-select";
 import { Button } from "~/components/button";
 import { useSlide } from "~/utils/context/SlideContext";
+import { UseFormRegister } from "react-hook-form";
 
 const ServicesActives = [
   { value: "noselected", content: "Select a Service" },
@@ -13,25 +14,23 @@ const ServicesActives = [
   { value: "seo", content: "Marketing & SEO" },
 ];
 
-export const ServicesInfo = ({
-  setServiceDataFunction,
-}: {
-  setServiceDataFunction: React.Dispatch<React.SetStateAction<ServicesData>>;
-}) => {
-  const [isPriority, setIsPriority] = useState(false);
+type ServicesInfoProps = {
+  enableTab: boolean;
+  register: UseFormRegister<AllData>;
+};
+
+export const ServicesInfo = ({ register, enableTab }: ServicesInfoProps) => {
   const [selectedService, setSelectedService] = useState("noselected");
 
   const { nextSlide } = useSlide();
-
-  useEffect(() => {
-    setServiceDataFunction({ priority: isPriority, service: selectedService });
-  }, [isPriority, selectedService]);
 
   return (
     <div className="services-info-wrapper">
       <div className="services-wrapper-inputs">
         <InputSelect
+          {...register("service")}
           htmlFor="service"
+          enableTab={enableTab}
           id="service"
           label="Service"
           options={ServicesActives}
@@ -40,14 +39,16 @@ export const ServicesInfo = ({
         />
 
         <InputCheckbox
+          {...register("priority")}
+          enableTab={enableTab}
           htmlFor="prioritary"
           id="prioritary"
           label="Prioritary"
-          setInputState={setIsPriority}
         />
       </div>
       <div>
         <Button
+          tabIndex={-1}
           type="submit"
           variant="primary"
           content="Submit"

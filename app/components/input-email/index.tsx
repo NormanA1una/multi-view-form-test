@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import "./style.css";
 
 type InputEmailProps = {
@@ -8,52 +9,60 @@ type InputEmailProps = {
   value?: string;
   labelClassName?: string;
   inputClassName?: string;
+  enableTab?: boolean;
   setIsValid: React.Dispatch<React.SetStateAction<boolean>>;
-  setInputState: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const InputEmail = ({
-  htmlFor,
-  id,
-  label,
-  required,
-  value,
-  inputClassName,
-  labelClassName,
-  setIsValid,
-  setInputState,
-}: InputEmailProps) => {
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+export const InputEmail = forwardRef<HTMLInputElement, InputEmailProps>(
+  (
+    {
+      htmlFor,
+      id,
+      label,
+      required,
+      value,
+      inputClassName,
+      labelClassName,
+      setIsValid,
+      enableTab,
+      ...props
+    },
+    ref
+  ) => {
+    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    setInputState(e.target.value);
-    setIsValid(emailRegex.test(e.target.value));
-  };
+      setIsValid(emailRegex.test(e.target.value));
+    };
 
-  return (
-    <div className="spacing-label-email">
-      <label
-        htmlFor={htmlFor}
-        className={
-          labelClassName
-            ? `${labelClassName} label-email-style`
-            : "label-email-style"
-        }
-      >
-        {label}
-      </label>
-      <input
-        id={id}
-        type="email"
-        value={value}
-        className={
-          inputClassName
-            ? `${inputClassName} input-email-style`
-            : "input-email-style"
-        }
-        required={required}
-        onChange={handleOnChange}
-      />
-    </div>
-  );
-};
+    return (
+      <div className="spacing-label-email">
+        <label
+          htmlFor={htmlFor}
+          className={
+            labelClassName
+              ? `${labelClassName} label-email-style`
+              : "label-email-style"
+          }
+        >
+          {label}
+        </label>
+        <input
+          {...props}
+          tabIndex={enableTab ? 2 : -1}
+          id={id}
+          type="email"
+          ref={ref}
+          value={value}
+          className={
+            inputClassName
+              ? `${inputClassName} input-email-style`
+              : "input-email-style"
+          }
+          required={required}
+          onChange={handleOnChange}
+        />
+      </div>
+    );
+  }
+);

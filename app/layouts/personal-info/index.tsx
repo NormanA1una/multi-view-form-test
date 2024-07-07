@@ -1,76 +1,139 @@
 import "./style.css";
 
 import { InputText } from "~/components/input-text";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "~/components/button";
 import { useSlide } from "~/utils/context/SlideContext";
 import { InputEmail } from "~/components/input-email";
+import { UseFormRegister } from "react-hook-form";
+
+type PersonalInfoProps = {
+  enableTab: boolean;
+  dataSubmited: AllData;
+  isSubmited: boolean;
+  enableNextTab: React.Dispatch<React.SetStateAction<boolean>>;
+  register: UseFormRegister<AllData>;
+};
 
 export const PersonalInfo = ({
-  personalData,
-  setPersonalDataFunction,
-}: {
-  personalData: PersonalData;
-  setPersonalDataFunction: React.Dispatch<React.SetStateAction<PersonalData>>;
-}) => {
-  const [personalName, setName] = useState("");
-  const [isValidName, setIsValidName] = useState(false);
+  register,
+  enableTab,
+  enableNextTab,
+  dataSubmited,
+  isSubmited,
+}: PersonalInfoProps) => {
+  const {
+    nextSlide,
+    isValidName,
+    setIsValidName,
+    isValidLastName,
+    setIsValidLastName,
+    isValidEmail,
+    setIsValidEmail,
+  } = useSlide();
 
-  const [personalLastname, setLastname] = useState("");
-  const [isValidLastName, setIsValidLastName] = useState(false);
-
-  const [personalEmail, setEmail] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(false);
-
-  const { nextSlide } = useSlide();
-
-  useEffect(() => {
-    setPersonalDataFunction({
-      name: personalName,
-      lastname: personalLastname,
-      email: personalEmail,
-    });
-  }, [personalName, personalLastname, personalEmail]);
+  const handleOnClick = () => {
+    enableNextTab(true);
+    nextSlide();
+  };
 
   return (
     <div className="personal-info-wrapper">
-      <div className="personal-wrapper-inputs">
-        <InputText
-          htmlFor="name"
-          id="name"
-          label="Name"
-          labelClassName="label-name-input"
-          minLength={2}
-          setIsValid={setIsValidName}
-          setInputState={setName}
-        />
-
-        <InputText
-          htmlFor="lastname"
-          id="lastname"
-          label="Last Name"
-          labelClassName="label-lastname-input"
-          minLength={2}
-          setIsValid={setIsValidLastName}
-          setInputState={setLastname}
-        />
-
-        <InputEmail
-          htmlFor="email"
-          id="email"
-          label="Email"
-          setIsValid={setIsValidEmail}
-          setInputState={setEmail}
-        />
-      </div>
       <div>
-        <Button
-          type="button"
-          variant="primary"
-          content="Continue"
-          onClickEvent={nextSlide}
-          isDisabled={!(isValidName && isValidLastName && isValidEmail)}
-        />
+        {isSubmited && (
+          <>
+            <h1 className="text-[#FEFEFE] text-3xl font-semibold">
+              The data you sent was:
+            </h1>
+
+            <div className="flex flex-col gap-3">
+              <div>
+                <h2 className="label-h2">Name:</h2>
+                <h3 className="label-h3">{dataSubmited.name}</h3>
+              </div>
+
+              <div>
+                <h2 className="label-h2">Last Name:</h2>
+                <h3 className="label-h3">{dataSubmited.lastname}</h3>
+              </div>
+
+              <div>
+                <h2 className="label-h2">Email:</h2>
+                <h3 className="label-h3">{dataSubmited.email}</h3>
+              </div>
+
+              <div>
+                <h2 className="label-h2">Country:</h2>
+                <h3 className="label-h3">{dataSubmited.country}</h3>
+              </div>
+
+              <div>
+                <h2 className="label-h2">City:</h2>
+                <h3 className="label-h3">{dataSubmited.city}</h3>
+              </div>
+
+              <div>
+                <h2 className="label-h2">Address:</h2>
+                <h3 className="label-h3">{dataSubmited.address}</h3>
+              </div>
+
+              <div>
+                <h2 className="label-h2">Service:</h2>
+                <h3 className="label-h3">{dataSubmited.service}</h3>
+              </div>
+
+              <div>
+                <h2 className="label-h2">Priority:</h2>
+                <h3 className="label-h3">
+                  {dataSubmited.priority ? "Yes" : "No"}
+                </h3>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+      <div className="personal-spacing-button">
+        <div className="personal-wrapper-inputs">
+          <InputText
+            {...register("name")}
+            htmlFor="name"
+            id="name"
+            label="Name"
+            labelClassName="label-name-input"
+            minLength={2}
+            enableTab={enableTab}
+            setIsValid={setIsValidName}
+          />
+
+          <InputText
+            {...register("lastname")}
+            htmlFor="lastname"
+            id="lastname"
+            label="Last Name"
+            labelClassName="label-lastname-input"
+            minLength={2}
+            enableTab={enableTab}
+            setIsValid={setIsValidLastName}
+          />
+
+          <InputEmail
+            {...register("email")}
+            htmlFor="email"
+            id="email"
+            label="Email"
+            enableTab={enableTab}
+            setIsValid={setIsValidEmail}
+          />
+        </div>
+        <div>
+          <Button
+            type="button"
+            variant="primary"
+            content="Continue"
+            onClickEvent={handleOnClick}
+            isDisabled={!(isValidName && isValidLastName && isValidEmail)}
+          />
+        </div>
       </div>
     </div>
   );

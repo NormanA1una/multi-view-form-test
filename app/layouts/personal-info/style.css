@@ -2,10 +2,22 @@
 
 @layer components {
   .personal-info-wrapper {
-    @apply bg-slate-500 h-screen w-screen flex flex-col gap-6 justify-center items-end pr-[5%];
+    @apply bg-slate-500 h-screen w-screen flex flex-col lg:flex-row gap-6 justify-center lg:justify-between items-end lg:items-center px-[5%];
   }
 
   .personal-wrapper-inputs {
     @apply bg-teal-600 flex flex-col gap-2 w-fit border border-teal-700 rounded-md p-4;
+  }
+
+  .personal-spacing-button {
+    @apply flex flex-col gap-6;
+  }
+
+  .label-h2 {
+    @apply text-[#FBFEFE] font-medium;
+  }
+
+  .label-h3 {
+    @apply text-[#000000] font-medium;
   }
 }

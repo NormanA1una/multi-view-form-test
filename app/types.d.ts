@@ -1,3 +1,5 @@
+type AllData = PersonalData & CountryData & ServicesData;
+
 type PersonalData = {
   name: string;
   lastname: string;
@@ -18,6 +20,17 @@ type ServicesData = {
 type SlideContextType = {
   currentIndex: number;
   nextSlide: () => void;
+  resetAllStates: () => void;
+  isValidName: boolean;
+  setIsValidName: React.Dispatch<React.SetStateAction<boolean>>;
+  isValidLastName: boolean;
+  setIsValidLastName: React.Dispatch<React.SetStateAction<boolean>>;
+  isValidEmail: boolean;
+  setIsValidEmail: React.Dispatch<React.SetStateAction<boolean>>;
+  isValidCountry: boolean;
+  setIsValidCountry: React.Dispatch<React.SetStateAction<boolean>>;
+  isValidCity: boolean;
+  setIsValidCity: React.Dispatch<React.SetStateAction<boolean>>;
+  isValidAddress: boolean;
+  setIsValidAddress: React.Dispatch<React.SetStateAction<boolean>>;
 };
-
-type AllData = PersonalData & CountryData & ServicesData;

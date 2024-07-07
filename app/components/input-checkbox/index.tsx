@@ -1,26 +1,26 @@
+import { forwardRef } from "react";
 import "./style.css";
 
 type InputCheckboxProps = {
   htmlFor: string;
   label: string;
   id: string;
-  setInputState: React.Dispatch<React.SetStateAction<boolean>>;
+  enableTab: boolean;
 };
 
-export const InputCheckbox = ({
-  htmlFor,
-  id,
-  label,
-  setInputState,
-}: InputCheckboxProps) => {
-  return (
-    <div className="spacing-label-checkbox">
-      <input
-        id={id}
-        type="checkbox"
-        onChange={(e) => setInputState(e.target.checked)}
-      />
-      <label htmlFor={htmlFor}>{label}</label>
-    </div>
-  );
-};
+export const InputCheckbox = forwardRef<HTMLInputElement, InputCheckboxProps>(
+  ({ htmlFor, id, label, enableTab, ...props }, ref) => {
+    return (
+      <div className="spacing-label-checkbox">
+        <input
+          {...props}
+          tabIndex={enableTab ? 2 : -1}
+          id={id}
+          ref={ref}
+          type="checkbox"
+        />
+        <label htmlFor={htmlFor}>{label}</label>
+      </div>
+    );
+  }
+);

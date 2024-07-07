@@ -5,6 +5,7 @@ type ButtonProps = {
   content: string;
   isDisabled?: boolean;
   type?: "submit" | "reset" | "button";
+  tabIndex?: number | undefined;
   onClickEvent?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
@@ -13,11 +14,13 @@ export const Button = ({
   variant,
   isDisabled,
   type,
+  tabIndex,
   onClickEvent,
 }: ButtonProps) => {
   if (variant === "primary")
     return (
       <button
+        tabIndex={tabIndex}
         className={`${isDisabled ? "primary-style-disabled" : "primary-style"}`}
         onClick={onClickEvent}
         disabled={isDisabled}

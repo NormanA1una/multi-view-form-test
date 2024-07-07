@@ -4,59 +4,63 @@ import { InputText } from "~/components/input-text";
 import { useEffect, useState } from "react";
 import { Button } from "~/components/button";
 import { useSlide } from "~/utils/context/SlideContext";
+import { UseFormRegister } from "react-hook-form";
+
+type CountryInfoProps = {
+  enableTab: boolean;
+  enableNextTab: React.Dispatch<React.SetStateAction<boolean>>;
+  register: UseFormRegister<AllData>;
+};
 
 export const CountryInfo = ({
-  countryData,
-  setCountryDataFunction,
-}: {
-  countryData: CountryData;
-  setCountryDataFunction: React.Dispatch<React.SetStateAction<CountryData>>;
-}) => {
-  const [personalCountry, setCountry] = useState("");
-  const [isValidCountry, setIsValidCountry] = useState(false);
+  register,
+  enableNextTab,
+  enableTab,
+}: CountryInfoProps) => {
+  const {
+    nextSlide,
+    isValidCountry,
+    isValidCity,
+    isValidAddress,
+    setIsValidCountry,
+    setIsValidCity,
+    setIsValidAddress,
+  } = useSlide();
 
-  const [personalCity, setCity] = useState("");
-  const [isValidCity, setIsValidCity] = useState(false);
-
-  const [personalAddress, setAddress] = useState("");
-  const [isValidAddress, setIsValidAddress] = useState(false);
-
-  const { nextSlide } = useSlide();
-
-  useEffect(() => {
-    setCountryDataFunction({
-      country: personalCountry,
-      city: personalCity,
-      address: personalAddress,
-    });
-  }, [personalCountry, personalCity, personalAddress]);
+  const handleOnClick = () => {
+    enableNextTab(true);
+    nextSlide();
+  };
 
   return (
     <div className="country-info-wrapper">
       <div className="country-wrapper-inputs">
         <InputText
+          {...register("country")}
           htmlFor="country"
           id="country"
           label="Country"
           minLength={3}
+          enableTab={enableTab}
           setIsValid={setIsValidCountry}
-          setInputState={setCountry}
         />
         <InputText
+          {...register("city")}
           htmlFor="city"
           id="city"
           label="City"
           minLength={3}
+          enableTab={enableTab}
           setIsValid={setIsValidCity}
-          setInputState={setCity}
         />
         <InputText
+          {...register("address")}
           htmlFor="address"
           id="address"
           label="Address"
           minLength={30}
+          enableTab={enableTab}
           setIsValid={setIsValidAddress}
-          setInputState={setAddress}
         />
       </div>
       <div>
@@ -64,7 +68,7 @@ export const CountryInfo = ({
           type="button"
           variant="primary"
           content="Continue"
-          onClickEvent={nextSlide}
+          onClickEvent={handleOnClick}
           isDisabled={!(isValidCountry && isValidCity && isValidAddress)}
         />
       </div>
