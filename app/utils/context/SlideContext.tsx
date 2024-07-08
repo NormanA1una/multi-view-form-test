@@ -1,4 +1,10 @@
-import { ReactNode, createContext, useContext, useState } from "react";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 const SlideContext = createContext<SlideContextType | undefined>(undefined);
 
@@ -12,10 +18,31 @@ export const SlideProvider = ({ children }: { children: ReactNode }) => {
   const [isValidCity, setIsValidCity] = useState(false);
   const [isValidAddress, setIsValidAddress] = useState(false);
 
+  const [enableSubmit, setEnableSubmit] = useState(false);
+
+  console.log(enableSubmit);
+
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => {
       return (prevIndex + 1) % 3;
     });
+  };
+
+  useEffect(() => {
+    handleEnableSubmitButton();
+  }, [isValidAddress]);
+
+  const handleEnableSubmitButton = () => {
+    if (
+      isValidName &&
+      isValidLastName &&
+      isValidEmail &&
+      isValidCountry &&
+      isValidCity &&
+      isValidAddress
+    ) {
+      setEnableSubmit(true);
+    }
   };
 
   const resetAllStates = () => {
@@ -25,6 +52,7 @@ export const SlideProvider = ({ children }: { children: ReactNode }) => {
     setIsValidCountry(false);
     setIsValidCity(false);
     setIsValidAddress(false);
+    setEnableSubmit(false);
   };
 
   return (
@@ -45,6 +73,7 @@ export const SlideProvider = ({ children }: { children: ReactNode }) => {
         setIsValidAddress,
         setIsValidCity,
         setIsValidCountry,
+        enableSubmit,
       }}
     >
       {children}

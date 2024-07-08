@@ -33,4 +33,5 @@ type SlideContextType = {
   setIsValidCity: React.Dispatch<React.SetStateAction<boolean>>;
   isValidAddress: boolean;
   setIsValidAddress: React.Dispatch<React.SetStateAction<boolean>>;
+  enableSubmit: boolean;
 };

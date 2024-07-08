@@ -22,7 +22,7 @@ type ServicesInfoProps = {
 export const ServicesInfo = ({ register, enableTab }: ServicesInfoProps) => {
   const [selectedService, setSelectedService] = useState("noselected");
 
-  const { nextSlide } = useSlide();
+  const { nextSlide, enableSubmit } = useSlide();
 
   return (
     <div className="services-info-wrapper">
@@ -52,7 +52,7 @@ export const ServicesInfo = ({ register, enableTab }: ServicesInfoProps) => {
           type="submit"
           variant="primary"
           content="Submit"
-          isDisabled={true}
+          isDisabled={!enableSubmit}
           onClickEvent={nextSlide}
         />
       </div>
